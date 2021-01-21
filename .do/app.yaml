@@ -1,0 +1,13 @@
+name: sample-craft-cms
+services:
+  - environment_slug: php
+    git:
+      branch: master
+      repo_clone_url: https://github.com/espensgr/do-craft-cms.git
+    envs:
+      - key: APP_ID
+        value: "CraftCMS--53c6334c-f04c-4231-91f3-06ee320b6638"
+      - key: SECURITY_KEY
+          value: "gt3oIoO43UhSkQiBcmThfdLMwy7fTV4S"
+    name: sample-laravel
+    run_command: heroku-php-apache2 web/
