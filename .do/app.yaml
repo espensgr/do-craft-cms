@@ -13,8 +13,10 @@ services:
     envs:
       - key: APP_ID
         value: "CraftCMS--53c6334c-f04c-4231-91f3-06ee320b6638"
+        type: "SECRET"
       - key: SECURITY_KEY
         value: "gt3oIoO43UhSkQiBcmThfdLMwy7fTV4S"
+        type: "SECRET"
       - key: DB_DSN
         scope: RUN_TIME
         value: ${db.DATABASE_URL}
