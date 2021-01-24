@@ -19,4 +19,4 @@ services:
         scope: RUN_TIME
         value: ${db.DATABASE_URL}
     dockerfile_path: Dockerfile
-    run_command: heroku-php-apache2 web/
+    output_dir: /app
