@@ -24,6 +24,10 @@ return [
 
         // The secure key Craft will use for hashing and encrypting data
         'securityKey' => App::env('SECURITY_KEY'),
+        'aliases' => [
+            '@web' => App::env('SITE_URL'),
+            '@webroot' => dirname(__DIR__) . '/web',
+        ]
     ],
 
     // Dev environment settings

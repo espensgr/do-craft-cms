@@ -6,19 +6,47 @@ databases:
     version: "12"
 name: sample-craft-cms
 services:
-  - name: sample-craft-cms
+  - name: craft-cms
+    dockerfile_path: Dockerfile
+    envs:
+    - key: SITE_URL
+      scope: RUN_AND_BUILD_TIME
+      value: ${APP_URL}
+    - key: APP_ID
+      scope: RUN_AND_BUILD_TIME
+      type: SECRET
+      value: CraftCMS--53c6334c-f04c-4231-91f3-06ee320b6638
+    - key: SECURITY_KEY
+      scope: RUN_AND_BUILD_TIME
+      type: SECRET
+      value: gt3oIoO43UhSkQiBcmThfdLMwy7fTV4S
+    - key: DB_SCHEMA
+      scope: RUN_AND_BUILD_TIME
+      value: public
+    - key: DB_DRIVER
+      scope: RUN_AND_BUILD_TIME
+      value: pgsql
+    - key: DB_SERVER
+      scope: RUN_AND_BUILD_TIME
+      value: ${db.HOSTNAME}
+    - key: DB_PORT
+      scope: RUN_AND_BUILD_TIME
+      value: ${db.PORT}
+    - key: DB_DATABASE
+      scope: RUN_AND_BUILD_TIME
+      value: ${db.DATABASE}
+    - key: DB_USER
+      scope: RUN_AND_BUILD_TIME
+      value: ${db.USERNAME}
+    - key: DB_PASSWORD
+      scope: RUN_AND_BUILD_TIME
+      value: ${db.PASSWORD}
     git:
       branch: master
       repo_clone_url: https://github.com/espensgr/do-craft-cms.git
-    envs:
-      - key: APP_ID
-        value: "CraftCMS--53c6334c-f04c-4231-91f3-06ee320b6638"
-        type: "SECRET"
-      - key: SECURITY_KEY
-        value: "gt3oIoO43UhSkQiBcmThfdLMwy7fTV4S"
-        type: "SECRET"
-      - key: DB_DSN
-        scope: RUN_TIME
-        value: ${db.DATABASE_URL}
-    dockerfile_path: Dockerfile
-    output_dir: /app
+      deploy_on_push: true
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /
